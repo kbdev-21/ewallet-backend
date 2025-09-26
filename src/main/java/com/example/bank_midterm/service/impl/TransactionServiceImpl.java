@@ -161,14 +161,16 @@ public class TransactionServiceImpl implements TransactionService {
         if (sender.getId().equals(receiver.getId())) {
             throw new CustomException(HttpStatus.CONFLICT, "Sender and receiver are the same person");
         }
-        if (sender.getBalance().compareTo(amount.add(calculateFee(amount))) < 0) {
+
+        var paidAmount = amount.add(calculateFee(amount));
+        if (sender.getBalance().compareTo(paidAmount) < 0) {
             throw new CustomException(HttpStatus.CONFLICT, "Sender does not have enough money");
         }
     }
 
     /* TODO:  */
     private BigDecimal calculateFee(BigDecimal amount) {
-        BigDecimal RATE = new BigDecimal("0.02");
+        BigDecimal RATE = new BigDecimal("0.001");
         return amount.multiply(RATE);
     }
 
