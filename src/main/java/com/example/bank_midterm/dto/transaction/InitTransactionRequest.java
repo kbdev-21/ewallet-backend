@@ -16,7 +16,7 @@ public class InitTransactionRequest {
     private UUID senderId;
 
     @NotNull
-    private UUID receiverId;
+    private String receiverHandle;
 
     @NotNull
     @DecimalMin(value = "0.1")

@@ -16,6 +16,7 @@ import com.example.bank_midterm.security.AuthUtil;
 import com.example.bank_midterm.service.NotificationService;
 import com.example.bank_midterm.service.OtpService;
 import com.example.bank_midterm.service.TransactionService;
+import com.example.bank_midterm.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,9 @@ import java.util.*;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
+    private final BigDecimal FEE_RATIO = BigDecimal.valueOf(0.00);
+
+    private final UserService userService;
     private final NotificationService notificationService;
     private final TransactionRepository transactionRepository;
     private final AuthUtil authUtil;
@@ -36,6 +40,7 @@ public class TransactionServiceImpl implements TransactionService {
     private final ModelMapper modelMapper;
 
     public TransactionServiceImpl(
+        UserService userService,
         NotificationService notificationService,
         TransactionRepository transactionRepository,
         AuthUtil authUtil,
@@ -45,6 +50,7 @@ public class TransactionServiceImpl implements TransactionService {
         TuitionTransactionRepository tuitionTransactionRepository,
         ModelMapper modelMapper
     ) {
+        this.userService = userService;
         this.notificationService = notificationService;
         this.transactionRepository = transactionRepository;
         this.authUtil = authUtil;
@@ -88,10 +94,12 @@ public class TransactionServiceImpl implements TransactionService {
             throw new CustomException(HttpStatus.FORBIDDEN, "User not allowed");
         }
 
+        var userResponse = userService.getUserByHandle(request.getReceiverHandle());
+
         User sender = userRepository.findById(request.getSenderId()).orElseThrow(
             () -> new CustomException(HttpStatus.NOT_FOUND, "Sender not found")
         );
-        User receiver = userRepository.findById(request.getReceiverId()).orElseThrow(
+        User receiver = userRepository.findById(userResponse.getId()).orElseThrow(
             () -> new CustomException(HttpStatus.NOT_FOUND, "Receiver not found")
         );
 
@@ -168,10 +176,8 @@ public class TransactionServiceImpl implements TransactionService {
         }
     }
 
-    /* TODO:  */
     private BigDecimal calculateFee(BigDecimal amount) {
-        BigDecimal RATE = new BigDecimal("0.001");
-        return amount.multiply(RATE);
+        return amount.multiply(FEE_RATIO);
     }
 
     private void additionalProcess(Transaction confirmingTransaction) {

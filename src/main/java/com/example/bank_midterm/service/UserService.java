@@ -7,6 +7,7 @@ import com.example.bank_midterm.entity.User;
 import java.util.List;
 
 public interface UserService {
+    UserResponse getUserByHandle(String handle);
     List<UserResponse> getAllUsers();
     UserResponse createUser(CreateUserRequest request);
 }

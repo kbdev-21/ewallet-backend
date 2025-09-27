@@ -117,7 +117,7 @@ public class TuitionServiceImpl implements TuitionService {
         String message = tuition.getSchoolName() + "-" + tuition.getStudentCode() + "-" + tuition.getTitle();
         var initTransactionRequest = new InitTransactionRequest(
             request.getPayerId(),
-            tuition.getReceiver().getId(),
+            tuition.getReceiver().getId().toString(),
             tuition.getAmount(),
             message,
             Transaction.Type.TUITION_PAYMENT
