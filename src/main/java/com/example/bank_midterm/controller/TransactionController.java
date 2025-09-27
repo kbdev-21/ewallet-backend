@@ -1,9 +1,9 @@
 package com.example.bank_midterm.controller;
 
-import com.example.bank_midterm.dto.transaction.ConfirmTransactionRequest;
-import com.example.bank_midterm.dto.transaction.InitTransactionRequest;
-import com.example.bank_midterm.dto.transaction.TransactionResponse;
-import com.example.bank_midterm.service.TransactionService;
+import com.example.bank_midterm.transaction.ConfirmTransactionRequest;
+import com.example.bank_midterm.transaction.InitTransactionRequest;
+import com.example.bank_midterm.transaction.TransactionResponse;
+import com.example.bank_midterm.transaction.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 

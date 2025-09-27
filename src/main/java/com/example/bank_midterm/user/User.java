@@ -1,0 +1,49 @@
+package com.example.bank_midterm.user;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.UUID;
+
+@Entity
+@Table(
+    name = "users"
+)
+@Data
+@NoArgsConstructor
+public class User {
+    public enum Role {
+        ADMIN, USER
+    }
+
+    @Id
+    private UUID id;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column(unique = true)
+    private String email;
+
+    @Column(unique = true)
+    private String phoneNum;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String searchPhrase;
+
+    private BigDecimal balance;
+
+    private String hashedPassword;
+
+    private Date createdAt;
+
+    private Date updatedAt;
+
+    @Version
+    private Long version;
+}

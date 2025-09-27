@@ -1,12 +1,11 @@
 package com.example.bank_midterm.controller;
 
-import com.example.bank_midterm.dto.transaction.ConfirmTransactionRequest;
-import com.example.bank_midterm.dto.transaction.TransactionResponse;
-import com.example.bank_midterm.dto.tuition.CreateTuitionRequest;
-import com.example.bank_midterm.dto.tuition.TuitionPaymentRequest;
-import com.example.bank_midterm.dto.tuition.TuitionResponse;
-import com.example.bank_midterm.entity.Tuition;
-import com.example.bank_midterm.service.TuitionService;
+import com.example.bank_midterm.transaction.TransactionResponse;
+import com.example.bank_midterm.tuition.CreateTuitionRequest;
+import com.example.bank_midterm.tuition.TuitionPaymentRequest;
+import com.example.bank_midterm.tuition.TuitionResponse;
+import com.example.bank_midterm.tuition.Tuition;
+import com.example.bank_midterm.tuition.TuitionService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

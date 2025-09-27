@@ -1,0 +1,27 @@
+package com.example.bank_midterm.transaction;
+
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import java.math.BigDecimal;
+import java.util.UUID;
+
+@Data
+@AllArgsConstructor
+public class InitTransactionRequest {
+    @NotNull
+    private UUID senderId;
+
+    @NotNull
+    private String receiverHandle;
+
+    @NotNull
+    @DecimalMin(value = "0.1")
+    private BigDecimal amount;
+
+    private String message;
+
+    private Transaction.Type type;
+}

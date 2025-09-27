@@ -1,9 +1,9 @@
 package com.example.bank_midterm.controller;
 
-import com.example.bank_midterm.dto.auth.LoginRequest;
-import com.example.bank_midterm.dto.auth.LoginResponse;
-import com.example.bank_midterm.dto.auth.UserResponse;
-import com.example.bank_midterm.service.AuthService;
+import com.example.bank_midterm.auth.LoginRequest;
+import com.example.bank_midterm.auth.LoginResponse;
+import com.example.bank_midterm.auth.UserResponse;
+import com.example.bank_midterm.auth.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
