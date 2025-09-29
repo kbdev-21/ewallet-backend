@@ -42,11 +42,9 @@ public class UserServiceImpl implements UserService {
         }
 
         return modelMapper.map(
-            userRepository.findByEmail(handle).orElse(
-                userRepository.findByPhoneNum(handle).orElseThrow(
-                    () -> new CustomException(HttpStatus.NOT_FOUND, "User not found")
-                )
-            ),
+            userRepository.findByEmail(handle)
+                .or(() -> userRepository.findByPhoneNum(handle))
+                .orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "User not found")),
             UserResponse.class
         );
     }
